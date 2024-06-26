@@ -12,13 +12,13 @@ export interface Task {
 }
 
 export enum Status {
-  ToDO = 'TODO',
+  ToDo = 'TO_DO',
   InProgress = 'IN_PROGRESS',
   Done = 'DONE',
 }
 
 export enum Priority {
+  Low = 'LOW',
   Normal = 'NORMAL',
-  Medium = 'MEDIUM',
-  Hight = 'HIGH',
+  High = 'HIGH',
 }

@@ -1,3 +1,46 @@
-<div>
-  {{ task.name }}
+<div
+  class="p-2 mb-1 border bg-white rounded-xl shadow-md flex items-center"
+  [ngClass]="{ 'cursor-pointer': task.childTasks.length }"
+>
+  <div
+    class="h-2 w-2 rounded-full inline-block ml-2 mr-4"
+    [ngClass]="{
+      'bg-green-500': task.status === status.Done,
+      'bg-slate-500	': task.status === status.ToDo,
+      'bg-red-600': task.status === status.InProgress
+    }"
+  ></div>
+  <div class="grow">
+    <p class="font-semibold">
+      {{ task.name }}
+    </p>
+    <p class="text-xs text-slate-400">
+      {{ task.taskNumber }}
+    </p>
+  </div>
+  <div class="w-[400px] flex">
+    <p class="w-1/4 text-sm">
+      <i class="fa-solid fa-calendar-days"></i>
+      {{ task.startDate || "-" | date : "LLL d" }}
+    </p>
+    <p class="w-1/4 text-sm">
+      <i class="fa-solid fa-calendar-days"></i>
+      {{ task.endDate || "-" | date : "LLL d" }}
+    </p>
+    <p class="w-1/4 text-sm">
+      <i
+        class="fa-solid fa-flag"
+        [ngClass]="{
+          'text-slate-500': task.priority === priority.Low,
+          'text-red-600': task.priority === priority.High,
+          'text-orange-400': task.priority === priority.Normal
+        }"
+      ></i>
+      {{ task.priority | titlecase }}
+    </p>
+    <p class="w-1/4 text-sm">
+      <i class="fa-solid fa-signal"></i>
+      {{ task.percentageOfProgress }}%
+    </p>
+  </div>
 </div>
