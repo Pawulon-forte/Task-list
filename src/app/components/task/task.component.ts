@@ -9,8 +9,13 @@ import { DatePipe, NgClass, TitleCasePipe } from '@angular/common';
   templateUrl: './task.component.html',
 })
 export class TaskComponent {
-  @Input() task!: Task;
-
   readonly status = Status;
   readonly priority = Priority;
+
+  @Input() task!: Task;
+  expandedTasks = false;
+
+  toggleNestedTasks(): void {
+    this.expandedTasks = !this.expandedTasks;
+  }
 }
