@@ -1,4 +1,13 @@
 <div class="h-screen p-3 px-10 bg-slate-100 overflow-scroll">
+  <div class="px-2 py-4 flex font-semibold text-slate-700">
+    <p class="ml-8 grow">NAME</p>
+    <div class="w-[400px] flex">
+      <p class="w-1/4">START</p>
+      <p class="w-1/4">END</p>
+      <p class="w-1/4">PRIORITY</p>
+      <p class="w-1/4">PROGRESS</p>
+    </div>
+  </div>
   @for (task of tasks; track $index) {
   <task [task]="task"></task>
   }
