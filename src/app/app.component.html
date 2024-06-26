@@ -1,5 +1,3 @@
 <main>
-  <task-list></task-list>
-
-  {{ tasks | async | json }}
+  <task-list [tasks]="tasks | async"></task-list>
 </main>
