@@ -1,11 +1,16 @@
 import { Component, Input } from '@angular/core';
 import { Priority, Status, Task } from '../../models/task';
-import { DatePipe, NgClass, TitleCasePipe } from '@angular/common';
+import {
+  DatePipe,
+  NgClass,
+  NgTemplateOutlet,
+  TitleCasePipe,
+} from '@angular/common';
 
 @Component({
   selector: 'task',
   standalone: true,
-  imports: [NgClass, DatePipe, TitleCasePipe],
+  imports: [NgClass, DatePipe, TitleCasePipe, NgTemplateOutlet],
   templateUrl: './task.component.html',
 })
 export class TaskComponent {

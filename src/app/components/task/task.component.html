@@ -1,56 +1,56 @@
 <div
-  class="p-2 mb-1 bg-white rounded-xl shadow-md flex items-center"
+  class="p-4 md:p-2 mb-1 bg-white rounded-xl shadow-md flex items-center flex-wrap md:flex-nowrap gap-3 md:gap-4"
   [ngClass]="{ 'cursor-pointer': task.childTasks.length }"
   (click)="toggleNestedTasks()"
 >
   <div
-    class="h-2 w-2 rounded-full inline-block ml-2 mr-4"
+    class="h-2 w-2 rounded-full inline-block md:ml-2"
     [ngClass]="{
       'bg-green-500': task.status === status.Done,
       'bg-slate-500	': task.status === status.ToDo,
       'bg-red-600': task.status === status.InProgress
     }"
   ></div>
-  <div class="grow flex items-center gap-3">
+  <div
+    class="grow flex items-center md:gap-3 justify-between md:justify-normal"
+  >
     <div class="flex flex-col">
-      <p class="font-semibold">
+      <p class="font-semibold text-sm truncate">
         {{ task.name }}
       </p>
-      <p class="text-xs text-slate-400">
+      <p class="text-xs text-slate-400 hidden md:block">
         {{ task.taskNumber }}
       </p>
     </div>
-    @if(task.childTasks.length){
-    <div class="flex items-center">
-      <i
-        class="fa-solid text-xl"
-        [ngClass]="expandedTasks ? 'fa-angle-up' : 'fa-angle-down'"
-      ></i>
-      <span class="text-sm"> ({{ task.childTasks.length }}) </span>
+    <div class="md:hidden flex items-center gap-2">
+      <ng-container *ngTemplateOutlet="priorityIcon"></ng-container>
+      <p class="text-xs text-slate-400 md:hidden">
+        {{ task.taskNumber }}
+      </p>
     </div>
-    }
+    <div class="hidden md:block">
+      <ng-container *ngTemplateOutlet="expandIcon"></ng-container>
+    </div>
   </div>
-  <div class="w-[400px] flex">
-    <p class="w-1/4 text-sm">
-      <i class="fa-solid fa-calendar-days"></i>
-      {{ task.startDate || "-" | date : "LLL d" }}
-    </p>
-    <p class="w-1/4 text-sm">
-      <i class="fa-solid fa-calendar-days"></i>
-      {{ task.endDate || "-" | date : "LLL d" }}
-    </p>
-    <p class="w-1/4 text-sm">
-      <i
-        class="fa-solid fa-flag"
-        [ngClass]="{
-          'text-slate-500': task.priority === priority.Low,
-          'text-red-600': task.priority === priority.High,
-          'text-orange-400': task.priority === priority.Normal
-        }"
-      ></i>
+  <div class="w-full md:w-[400px] flex justify-between md:justify-normal">
+    <div class="md:hidden">
+      <ng-container *ngTemplateOutlet="expandIcon"></ng-container>
+    </div>
+    <div class="md:w-1/2 gap-6 md:gap-0 flex">
+      <p class="md:w-1/2 text-sm">
+        <i class="fa-solid fa-calendar-days"></i>
+        {{ task.startDate || "-" | date : "LLL d" }}
+      </p>
+      <p class="md:w-1/2 text-sm">
+        <i class="fa-solid fa-calendar-days"></i>
+        {{ task.endDate || "-" | date : "LLL d" }}
+      </p>
+    </div>
+    <p class="md:w-1/4 text-sm hidden md:block">
+      <ng-container *ngTemplateOutlet="priorityIcon"></ng-container>
       {{ task.priority | titlecase }}
     </p>
-    <p class="w-1/4 text-sm">
+    <p class="w-1/4 text-sm hidden md:block">
       <i class="fa-solid fa-signal"></i>
       {{ task.percentageOfProgress }}%
     </p>
@@ -65,3 +65,26 @@
   <task class="grow" [task]="childTask"></task>
 </div>
 } }
+
+<ng-template #priorityIcon>
+  <i
+    class="fa-solid fa-flag"
+    [ngClass]="{
+      'text-slate-500': task.priority === priority.Low,
+      'text-red-600': task.priority === priority.High,
+      'text-orange-400': task.priority === priority.Normal
+    }"
+  ></i>
+</ng-template>
+
+<ng-template #expandIcon>
+  @if(task.childTasks.length){
+  <div class="flex items-center gap-1">
+    <i
+      class="fa-solid text-xl"
+      [ngClass]="expandedTasks ? 'fa-angle-up' : 'fa-angle-down'"
+    ></i>
+    <span class="text-sm"> ({{ task.childTasks.length }}) </span>
+  </div>
+  }
+</ng-template>
