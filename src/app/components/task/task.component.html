@@ -4,27 +4,29 @@
   (click)="toggleNestedTasks()"
 >
   <div
-    class="h-2 w-2 rounded-full inline-block md:ml-2"
-    [ngClass]="{
-      'bg-green-500': task.status === status.Done,
-      'bg-slate-500	': task.status === status.ToDo,
-      'bg-red-600': task.status === status.InProgress
-    }"
-  ></div>
-  <div
-    class="grow flex items-center md:gap-3 justify-between md:justify-normal"
+    class="grow flex items-center justify-between md:justify-normal gap-3 md:gap-0"
   >
-    <div class="flex flex-col">
-      <p class="font-semibold text-sm truncate">
-        {{ task.name }}
-      </p>
-      <p class="text-xs text-slate-400 hidden md:block">
-        {{ task.taskNumber }}
-      </p>
+    <div class="flex items-center gap-3 md:gap-4">
+      <div
+        class="h-2 w-2 min-w-2 rounded-full inline-block md:ml-2 self-start md:self-auto mt-[7px] md:mt-0"
+        [ngClass]="{
+          'bg-green-500': task.status === status.Done,
+          'bg-slate-500	': task.status === status.ToDo,
+          'bg-red-600': task.status === status.InProgress
+        }"
+      ></div>
+      <div class="flex flex-col md:pr-4">
+        <p class="font-semibold text-sm">{{ task.name }}</p>
+        <p class="text-xs text-slate-400 hidden md:block">
+          {{ task.taskNumber }}
+        </p>
+      </div>
     </div>
-    <div class="md:hidden flex items-center gap-2">
+    <div
+      class="md:hidden flex items-center gap-2 justify-end whitespace-nowrap self-start"
+    >
       <ng-container *ngTemplateOutlet="priorityIcon"></ng-container>
-      <p class="text-xs text-slate-400 md:hidden">
+      <p class="text-xs text-slate-400 md:hidden leading-5">
         {{ task.taskNumber }}
       </p>
     </div>
@@ -32,7 +34,9 @@
       <ng-container *ngTemplateOutlet="expandIcon"></ng-container>
     </div>
   </div>
-  <div class="w-full md:w-[400px] flex justify-between md:justify-normal">
+  <div
+    class="w-full md:w-[350px] md:min-w-[350px] lg:w-[400px] lg:min-w-[400px] flex justify-between md:justify-normal"
+  >
     <div class="md:hidden">
       <ng-container *ngTemplateOutlet="expandIcon"></ng-container>
     </div>
